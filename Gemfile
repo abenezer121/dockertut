@@ -38,6 +38,7 @@ group :development, :test do
   gem "standard"
   gem "brakeman", require: false
   gem "rubocop", require: false
+  gem "rubocop-rails-omakase", require: false
 end
 
 group :development do
