@@ -19,24 +19,11 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Install Brakeman
-        run: |
-          if ! gem list -i brakeman > /dev/null; then
-            gem install brakeman
-          fi
-
-      - name: Scan for common Rails security vulnerabilities
-        run: |
-          # Use bin/brakeman if exists, otherwise fallback to global gem
-          if [ -f bin/brakeman ]; then
-            bin/brakeman --no-pager
-          else
-            brakeman --no-pager
-          fi
+      - name: Scan for common Rails security vulnerabilities using static analysis
+        run: bin/brakeman --no-pager
 
   lint:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -47,17 +34,6 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Install RuboCop
-        run: |
-          if ! gem list -i rubocop > /dev/null; then
-            gem install rubocop
-          fi
-
       - name: Lint code for consistent style
-        run: |
-          # Use bin/rubocop if exists, otherwise fallback to global gem
-          if [ -f bin/rubocop ]; then
-            bin/rubocop -f github
-          else
-            rubocop -f github
-          fi
+        run: bin/rubocop -f github
+
