@@ -36,6 +36,8 @@ group :development, :test do
   gem "faker"
   gem "rspec-rails"
   gem "standard"
+  gem "brakeman", require: false
+  gem "rubocop", require: false
 end
 
 group :development do
